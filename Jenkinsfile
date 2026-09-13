@@ -3,16 +3,13 @@ pipeline {
 
     environment {
         APP_NAME = 'node-app-nti'
-        REPO_URL = 'https://github.com/YOUR_USERNAME/YOUR_REPO.git'
     }
 
     stages {
 
         stage('Getting Repo Files') {
             steps {
-                git branch: "${BRANCH_NAME}",
-                    credentialsId: 'jenkins',
-                    url: "${REPO_URL}"
+                checkout scm
             }
         }
 
@@ -35,7 +32,6 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-
                     withCredentials([
                         usernamePassword(
                             credentialsId: 'docker',
@@ -43,7 +39,6 @@ pipeline {
                             passwordVariable: 'DOCKER_PASSWORD'
                         )
                     ]) {
-
                         sh """
                             echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USERNAME} --password-stdin
 
@@ -59,7 +54,6 @@ pipeline {
     }
 
     post {
-
         success {
             echo "Pipeline succeeded for branch: ${BRANCH_NAME}"
         }
