@@ -55,7 +55,7 @@ pipeline {
 
     post {
         success {
-            echo "Pipeline succeeded for branch: ${BRANCH_NAME}"
+            echo "Pipeline succeeded for nada's branch: ${BRANCH_NAME}"
         }
 
         failure {
