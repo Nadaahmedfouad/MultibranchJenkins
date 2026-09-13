@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        APP_NAME = 'node-app-nti'
+        APP_NAME = 'node-nada-app-nti'
     }
 
     stages {
